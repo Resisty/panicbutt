@@ -7,7 +7,7 @@
 #
 #  Creation Date : 30-03-2016
 #
-#  Last Modified : Thu 07 Apr 2016 03:35:02 PM CDT
+#  Last Modified : Thu 05 Jan 2017 03:57:45 PM CST
 #
 #  Created By : Brian Auron
 #
@@ -35,6 +35,12 @@ class IntString(object):
         self._base = 10
         self._tonum = int
         self._tostr = str
+
+    def __add__(self, x):
+        return self.__class__(str(self.num + x))
+
+    def __sub__(self, x):
+        return self.__class__(str(self.num - x))
 
     def __iadd__(self, x):
         self.num += x
