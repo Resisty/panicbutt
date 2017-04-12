@@ -7,7 +7,7 @@
 #
 #  Creation Date : 01-05-2015
 #
-#  Last Modified : Tue 29 Mar 2016 05:29:12 PM CDT
+#  Last Modified : Wed 12 Apr 2017 03:21:57 PM CDT
 #
 #  Created By : Brian Auron
 #
@@ -75,6 +75,9 @@ jeff_crisis_levels = {'critical' : {'text' : 'black',
                       'under control' : {'text' : 'yellow',
                                          'font' : 'Cursive',
                                          'bg' : "undercontrol.gif"},
+                      'awol' : {'text' : 'orange',
+                                         'font' : 'Impact',
+                                         'bg' : "awol.gif"},
                       'linuxpocalypse' : {'text' : 'green',
                                           'font' : 'Impact',
                                           'bg' : "tux.gif"}}
