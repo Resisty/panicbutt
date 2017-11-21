@@ -7,7 +7,7 @@
 #
 #  Creation Date : 03-05-2015
 #
-#  Last Modified : Thu 07 Apr 2016 03:40:17 PM CDT
+#  Last Modified : Sat 29 Jul 2017 02:24:40 PM CDT
 #
 #  Created By : Brian Auron
 #
@@ -16,6 +16,7 @@
 import functools
 import yaml
 import datetime
+import operator
 import slackbot.bot
 import peewee
 import re
@@ -136,6 +137,37 @@ def count_update(message, *groups):
             psql_db.connect() # not entirely sure why this is necessary but it is
             count = Counts.get(Counts.key == key)
         count.count += delta
+        count.save()
+    message.reply('%s is now %s' % (key, count.count))
+
+ARITHMETICSTRING = r'''^([\w\.-]+)\s
+                     ([+\-\*/])=\s
+                     (-?\d+)$'''
+ARITHMETIC = re.compile(ARITHMETICSTRING, re.IGNORECASE|re.VERBOSE)
+@slackbot.bot.listen_to(ARITHMETIC)
+def arithmetic_update(message, *groups):
+    '''Adjust a count arithmetically
+Examples: a += 3
+          counting -= 2
+          stuff *= 0
+          things /= 1'''
+    key, oper, amount  = groups
+    key = key.lower()
+    oper = {'+': operator.add,
+             '-': operator.sub,
+             '*': operator.mul,
+             '/': operator.floordiv}[oper]
+    with psql_db.atomic():
+        try:
+            count = Counts.create(key = key, count = 0)
+        except peewee.IntegrityError:
+            psql_db.connect() # not entirely sure why this is necessary but it is
+            count = Counts.get(Counts.key == key)
+        try:
+            count.count = oper(count.count, int(amount))
+        except ZeroDivisionError:
+            message.reply('You can\'t divide by zero, stupid!')
+            return
         count.save()
     message.reply('%s is now %s' % (key, count.count))
 

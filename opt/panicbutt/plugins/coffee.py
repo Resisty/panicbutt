@@ -7,7 +7,7 @@
 #
 #  Creation Date : 21-03-2016
 #
-#  Last Modified : Mon 03 Jul 2017 02:15:04 PM CDT
+#  Last Modified : Tue 21 Nov 2017 11:33:28 AM CST
 #
 #  Created By : Brian Auron
 #
@@ -40,5 +40,5 @@ def coffee(message, *groups):
                'I once wrote a 900-page epic poem called "Sheer Ecstasy" in which I rhymed "French press" with "bench press" over 15,000 times. It was the only rhyme in the poem.',
                'The New York Times has already written an article titled "Skeleton Of Nation\'s Greatest Burden Found Floating In Septic Tank Filled With Coffee," which it will run on the day that I die.']
     msg = random.choice(strings)
-    message.reply(msg)
-
+    if random.randint(0,100) < 20:
+        message.reply(msg)
