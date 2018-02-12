@@ -15,8 +15,6 @@
 
 import slackbot.bot
 import re
-import random
-import traceback
 
 REDDIT_REGEX = "((\/r\/)|(r\/))(\w+)"
 REDDIT = re.compile(REDDIT_REGEX, re.IGNORECASE)
@@ -25,5 +23,5 @@ def reddit(message, *groups):
 
 	matches = re.search(REDDIT_REGEX, message_text)         
 	subreddit = matches.group(4) 
-    msg ="http://reddit.com/r/{}".format(subreddit)
-    message.reply(msg)
+	msg ="http://reddit.com/r/{}".format(subreddit)
+	message.reply(msg)
