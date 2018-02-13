@@ -16,7 +16,7 @@
 import slackbot.bot
 import re
 
-REDDIT_REGEX = "((\/r\/)|(r\/))(\w+)"
+REDDIT_REGEX = "\s?+((\/r\/)|(r\/))(\w+)\s?+"
 REDDIT = re.compile(REDDIT_REGEX, re.IGNORECASE)
 @slackbot.bot.listen_to(REDDIT)
 def reddit(message, *groups):
