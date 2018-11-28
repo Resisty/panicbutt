@@ -7,7 +7,7 @@
 #
 #  Creation Date : 22-03-2016
 #
-#  Last Modified : Tue 29 Mar 2016 05:22:42 PM CDT
+#  Last Modified : Wed 26 Sep 2018 06:16:46 PM CDT
 #
 #  Created By : Brian Auron
 #
@@ -35,8 +35,8 @@ def urban(message, *groups):
         url = 'http://api.urbandictionary.com/v0/define?term={0}'
         url = url.format(what)
         results = requests.get(url)
-        jdata = json.loads(results.text)
-        if jdata['result_type'] == 'no_results':
+        jdata = results.json()
+        if 'list' not in jdata or not jdata['list']:
             msg = 'That\'s a stupid search!'
         else:
             try:
