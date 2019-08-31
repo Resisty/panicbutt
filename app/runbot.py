@@ -4,6 +4,8 @@
 
 import os
 import sys
+sys.path.insert(0, f'{os.getcwd()}')
+# pylint: disable=wrong-import-position
 import slackbot.bot
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
