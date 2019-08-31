@@ -1,7 +1,7 @@
 FROM python:3
 
-WORKDIR /app
+WORKDIR /
 
-ADD app /app
+ADD app /
 RUN python -m pip install -r requirements.txt
 ENTRYPOINT ["/bin/bash"] 
