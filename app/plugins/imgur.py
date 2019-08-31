@@ -1,21 +1,30 @@
+#!/usr/bin/env python
+""" Module for using the imgur api in a slack bot
+"""
 import math
 import random
 import re
-
 import requests
 import slackbot.bot
 
 IMGUR_ID = '7fd4f416717f07d'
 IMGUR_URI = 'https://api.imgur.com/3/gallery/search'
 
-class QueryParam(object):
+# pylint: disable=too-few-public-methods
+class QueryParam:
+    """ Abstraction for constructing query parameters for imgur requests
+    """
     @classmethod
-    def from_type(cls, t):
+    def from_type(cls, query_type):
+        """ Return a query parameter from a type
+        """
         return {'image': {'q_type': 'png'},
-                'animate': {'q_type': 'anigif'}}[t]
+                'animate': {'q_type': 'anigif'}}[query_type]
 
 @slackbot.bot.listen_to(re.compile('^(image|animate) (.*)$', re.I))
 def imgur(message, *groups):
+    """ Listen for and reply to imgur messages
+    """
     q_type = QueryParam.from_type(groups[0])
     query = groups[1]
     params = {'q': query}

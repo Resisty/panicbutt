@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+""" Module for using the giphy api in the slack bot
+"""
 import math
 import random
 import re
@@ -10,6 +13,8 @@ GIPHY_SEARCH_URL = 'http://api.giphy.com/v1/gifs/search'
 
 @slackbot.bot.listen_to(re.compile('^giphy (.*)$', re.I))
 def giphy(message, query):
+    """ Listen and respond to giphy messages
+    """
     params = {'q': query, 'api_key': GIPHY_API_KEY}
     response = requests.get(GIPHY_SEARCH_URL, params=params)
     if not response.ok:

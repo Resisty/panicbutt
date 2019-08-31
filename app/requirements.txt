@@ -1,7 +1,8 @@
 backports.ssl-match-hostname
+flask
 beautifulsoup4
 peewee
-psycopg2
+psycopg2-binary
 pyowm
 python-dateutil
 PyYAML

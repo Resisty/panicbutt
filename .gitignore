@@ -1,6 +1,8 @@
 *.yaml
 *.yml
 *.pyc
+__pycache__/
+venv/
 bin/
 include/
 lib/
