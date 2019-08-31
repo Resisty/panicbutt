@@ -12,7 +12,7 @@ import slackbot.bot
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(BASE_DIR, '../config.yml')
 with open(CONFIG, 'r') as yml:
-    CFG = yaml.load(yml.read())
+    CFG = yaml.load(yml.read(), Loader=yaml.FullLoader)
 
 URL = CFG['github']['url']
 OWNER = CFG['github']['owner']

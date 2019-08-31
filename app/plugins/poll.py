@@ -11,7 +11,7 @@ import yaml
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(BASE_DIR, '../config.yml')
 with open(CONFIG, 'r') as yml:
-    CFG = yaml.load(yml.read())
+    CFG = yaml.load(yml.read(), Loader=yaml.FullLoader)
 DBUSER = CFG['dbuser']
 DBPASS = CFG['dbpass']
 DB = CFG['db']

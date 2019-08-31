@@ -26,7 +26,7 @@ import slackbot.bot
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 YAML_LOC = os.path.join(BASE_DIR, '../config.yml')
 with open(YAML_LOC, 'r') as fptr:
-    CFG = yaml.load(fptr.read())
+    CFG = yaml.load(fptr.read(), Loader=yaml.FullLoader)
 DBUSER = CFG['dbuser']
 DBPASS = CFG['dbpass']
 DB = CFG['db']

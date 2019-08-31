@@ -11,12 +11,12 @@ import slackbot.bot
 import peewee
 import yaml
 from playhouse.postgres_ext import PostgresqlExtDatabase
-import fakenumbers
+import app.plugins.fakenumbers
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(BASE_DIR, '../config.yml')
 with open(CONFIG, 'r') as fptr:
-    CFG = yaml.load(fptr.read())
+    CFG = yaml.load(fptr.read(), Loader=yaml.FullLoader)
 DBUSER = CFG['dbuser']
 DBPASS = CFG['dbpass']
 DB = CFG['db']
@@ -145,11 +145,11 @@ def count_update(message, *groups):
     key = key.lower()
     delta = {'++': 1, '--': -1}[delta]
     try:
-        counter = fakenumbers.NumberString.from_str(key)
+        counter = app.plugins.fakenumbers.NumberString.from_str(key)
         counter += delta
         message.reply(counter.str)
         return
-    except fakenumbers.NoNumberError:
+    except app.plugins.fakenumbers.NoNumberError:
         pass
     with PSQL_DB.atomic():
         try:
