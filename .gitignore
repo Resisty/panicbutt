@@ -6,3 +6,4 @@ include/
 lib/
 local/
 pip-selfcheck.json
+config.yml
