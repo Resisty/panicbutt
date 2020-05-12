@@ -1,29 +1,18 @@
-#!/usr/bin/python
-# =======================================
-#
-#  File Name :
-#
-#  Purpose :
-#
-#  Creation Date : 22-03-2016
-#
-#  Last Modified : Wed 26 Sep 2018 06:16:46 PM CDT
-#
-#  Created By : Brian Auron
-#
-# ========================================
+#!/usr/bin/env python
+""" Module for searching urban dictionary
+"""
 
-import slackbot.bot
 import re
-import json
-import random
-import requests
 import traceback
+import requests
+import slackbot.bot
 
 URBANSTRING = r'''urban\s([\w\s-]+)($|\s#\d+)'''
 URBAN = re.compile(URBANSTRING, re.IGNORECASE)
 @slackbot.bot.respond_to(URBAN)
 def urban(message, *groups):
+    """ Respond to a request to search urban dictionary
+    """
     try:
         what = groups[0]
         what = what.replace(' ', '%20')
@@ -41,8 +30,8 @@ def urban(message, *groups):
         else:
             try:
                 msg = jdata['list'][which]['definition']
-            except IndexError as e:
+            except IndexError:
                 msg = 'No such definition number!'
         message.reply(msg)
-    except:
-         print traceback.format_exc()
+    except:  # pylint: disable=bare-except
+        print(traceback.format_exc())

@@ -1,17 +1,4 @@
-#!/usr/bin/python
-# =======================================
-#
-#  File Name :
-#
-#  Purpose :
-#
-#  Creation Date : 21-03-2016
-#
-#  Last Modified : Tue 21 Nov 2017 11:33:28 AM CST
-#
-#  Created By : Brian Auron
-#
-# ========================================
+#!/usr/bin/env python
 
 import slackbot.bot
 import re

@@ -1,17 +1,4 @@
-#!/usr/bin/python
-# =======================================
-#
-#  File Name : runbot.py
-#
-#  Purpose :
-#
-#  Creation Date : 18-03-2016
-#
-#  Last Modified : Tue 29 Mar 2016 05:26:19 PM CDT
-#
-#  Created By : Brian Auron
-#
-# ========================================
+#!/usr/bin/env python
 
 import slackbot.bot
 import logging
