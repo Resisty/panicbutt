@@ -5,10 +5,12 @@
 import json
 import os
 import re
+import logging
 import requests
 import yaml
 import slackbot.bot
 
+LOGGER = logging.getLogger(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(BASE_DIR, '../config.yml')
 with open(CONFIG, 'r') as yml:
@@ -37,7 +39,8 @@ class Issue:
         """ Create a github issue for the configured account+repo
         """
         data = {'title': title, 'body': body}
-        req = requests.post(self.uri, headers=HEADERS, data=json.dumps(data))
+        LOGGER.info('Requesting address "%s" with headers "%s" and json "%s"', self.uri, HEADERS, data)
+        req = requests.post(self.uri, headers=HEADERS, json=data)
         return json.loads(req.text)
 
 
@@ -76,5 +79,6 @@ def create_issue(message, *groups):
     title = groups[2].strip('"')
     body = groups[5].strip('"')
     resp = Issue().create(title, body)
+    LOGGER.info('Got response from github: %s', resp)
     message.reply(resp['html_url'])
     #print(f'Got a message {message.body} with groups "{groups}"'
