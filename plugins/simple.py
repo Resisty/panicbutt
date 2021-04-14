@@ -234,6 +234,26 @@ def enhance(message):
     '''Enhance!'''
     message.send('/me types furiously. "Enhance."')
 
+FLARESTRING = r'''flare(\s(that|it)\sfor\s(me|us))?'''
+FLARE = re.compile(FLARESTRING, re.I)
+@slackbot.bot.listen_to(FLARE)
+def flare_that_for_you(message, *groups):
+    '''Deep Rock Galactic flares requested. Toss flares!'''
+    message.send('`FFFF` :sparkler::sparkler::sparkler::sparkler:')
+
+BADGERSTRING = r'''.*'''
+BADGER = re.compile(BADGERSTRING, re.I)
+@slackbot.bot.listen_to(BADGER)
+def flare_that_for_you(message, *groups):
+    '''Reply to every message from Badger in a thread'''
+    udi = message._get_user_id()  # pylint: disable=protected-access
+    try:
+        name = message._client.users[udi]['name']
+    except KeyError:
+        return
+    if name == 'fishmanpet' and random.randint(1,10) == 4: # chosen by fair dice roll
+        message.reply('FFFFBPBBTHPFBPTHPBFTHPPP! :tongue:', in_thread=True)
+
 @slackbot.bot.respond_to(re.compile('h[ae]lp', re.I))
 def explore(message, *groups):  # pylint: disable=unused-argument
     '''@mention the bot with 'help' for this message.'''
