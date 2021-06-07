@@ -161,6 +161,9 @@ def count_update(message, *groups):
     except (peewee.IntegrityError, psycopg2.errors.UniqueViolation):
         # PSQL_DB.connect() # not entirely sure why this is necessary but it is
         count = Counts.get(Counts.key == key)
+    except (psycopg2.InterfaceError):
+        PSQL_DB.connect() # not entirely sure why this is necessary but it is
+        count = Counts.get(Counts.key == key)
     count.count += delta
     count.save()
     message.reply(f'{key} is now {count.count}')
