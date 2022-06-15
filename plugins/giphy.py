@@ -5,10 +5,14 @@ import math
 import random
 import re
 
+import yaml
 import requests
 import slackbot.bot
 
-GIPHY_API_KEY = 'dc6zaTOxFJmzC'
+from runbot import CONFIG
+with open(CONFIG, 'r') as yml:
+    config = yaml.load(yml.read(), Loader=yaml.FullLoader)
+GIPHY_API_KEY = config['giphy']['key']
 GIPHY_SEARCH_URL = 'http://api.giphy.com/v1/gifs/search'
 
 @slackbot.bot.listen_to(re.compile('^giphy (.*)$', re.I))
